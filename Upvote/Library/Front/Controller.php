@@ -13,7 +13,7 @@ class Controller
 	 * 
 	 * @var array
 	 */
-	protected $_config;
+	protected $config;
 	
 	/**
 	 * Class construction, requires config array. 

@@ -1,8 +1,8 @@
 <?php
 
 namespace Upvote\Application\Controllers;
-use \Upvote;
 
+use \Upvote\Application\Models as Model;
 class Comment extends ControllerBase 
 {
 	
@@ -14,13 +14,21 @@ class Comment extends ControllerBase
             exit;
         }
         
-        $sql = 'INSERT INTO comment (created_by, created_on, story_id, comment) VALUES (?, NOW(), ?, ?)';
-        $stmt = $this->getDba()->prepare($sql);
-        $stmt->execute(array(
-            $_SESSION['username'],
-            $_POST['story_id'],
-            filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-        ));
+        // New Comment model.
+        $Comment = new Model\Comment($this->getConfig());
+        
+        // Could also use Model::populate method if k/v pairs match.
+        $Comment->created_by = $_SESSION['username'];
+        $Comment->story_id = $_POST['story_id'];
+        $Comment->comment = $_POST['comment'];
+        $Comment->created_on = new \DateTime();
+        
+        // @todo Add validation & exception handling.
+        // ($Comment->isValid()) ? $Comment->save():null;
+        
+        $Comment->save();
+        
+        // Redirect back
         header("Location: /story/?id=" . $_POST['story_id']);
 	}
 }

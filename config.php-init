@@ -9,14 +9,43 @@ return array(
         'name' => '',
     ),
     
+    // Decided to use nested arrays for route matching at the moment as its KISS
     'routes' => array(
-        '' => 'index/index',
-        'story' => 'story/index',
-        'story/create' => 'story/create',
-        'comment/create' => 'comment/create',
-        'user/create' => 'user/create',
-        'user/account' => 'user/account',
-        'user/login' => 'user/login',
-        'user/logout' => 'user/logout',
+        '' => array(
+                'controller' => 'Upvote\Application\Controllers\Index',
+                'action' => 'index'
+        ),
+        'info' => array(
+                'controller' => 'Upvote\Application\Controllers\Index',
+                'action' => 'info'
+        ),
+        'story' => array(
+                'controller' => 'Upvote\Application\Controllers\Story',
+                'action' => 'index'
+        ),
+        'story/create' => array(
+                'controller' => 'Upvote\Application\Controllers\Story',
+                'action' => 'create'
+        ),
+        'comment/create' => array(
+                'controller' => 'Upvote\Application\Controllers\Comment',
+                'action' => 'create'
+        ),
+        'user/create' => array(
+            'controller' => 'Upvote\Application\Controllers\User',
+            'action' => 'create ',
+        ),
+        'user/account' => array(
+            'controller' => 'Upvote\Application\Controllers\User',
+            'action' => 'account',
+        ),
+        'user/login' => array(
+            'controller' => 'Upvote\Application\Controllers\User',
+            'action' => 'login',
+        ),
+        'user/logout' => array(
+            'controller' => 'Upvote\Application\Controllers\User',
+            'action' => 'logout',
+        ),
     ),
 );

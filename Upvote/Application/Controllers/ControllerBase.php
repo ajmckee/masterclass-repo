@@ -9,13 +9,13 @@ class ControllerBase
 	 * 
 	 * @var array
 	 */
-	protected $_config;
+	protected $config;
 	
 	/**
 	 * PDO Connection
 	 * @var \Pdo
 	 */
-	protected $_dba;
+	protected $dba;
 	
 	public function __construct(array $config)
 	{
@@ -32,8 +32,8 @@ class ControllerBase
 	{
 		$dbconfig = $this->getConfig()['database'];
 		$dsn = 'mysql:host=' . $dbconfig['host'] . ';dbname=' . $dbconfig['name'];
-		$this->_dba = new \PDO($dsn, $dbconfig['user'], $dbconfig['pass']);
-		$this->_dba->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		$this->dba = new \PDO($dsn, $dbconfig['user'], $dbconfig['pass']);
+		$this->dba->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		
 	}
 	
@@ -44,7 +44,7 @@ class ControllerBase
 	 */
 	protected function getDba()
 	{
-		return $this->_dba;
+		return $this->dba;
 	}
 	
 	/**
@@ -53,7 +53,7 @@ class ControllerBase
 	 * @param array $config
 	 */
 	protected function setupConfig($config) {
-		$this->_config = $config;
+		$this->config = $config;
 	}
 	
 	/**
@@ -62,6 +62,6 @@ class ControllerBase
 	 */
 	protected function getConfig()
 	{
-		return $this->_config;
+		return $this->config;
 	}
 }

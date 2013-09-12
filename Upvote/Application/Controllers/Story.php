@@ -1,6 +1,5 @@
 <?php
 namespace Upvote\Application\Controllers;
-use Upvote;
 class Story extends ControllerBase 
 {
 	
